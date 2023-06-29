@@ -1,0 +1,123 @@
+
+
+<section class="info" >
+  <svg class="info__mob" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+    <path fill="#fff" d="M500,97C126.7,96.3,0.8,19.8,0,0v100l1000,0V1C1000,19.4,873.3,97.8,500,97z"></path>
+  </svg>
+  <app-header></app-header>
+  <div class="container">
+    <div class="info__desc">
+      <p class="title title--inner">Endless business posiblittes</p>
+      <p class="info__subtitle">Best <span>Solution</span> And Great <span>Business</span></p>
+      <div class="info__text">
+        <p>There are many lorem Ipsum available but the majority have in some form<br> randomised words which don't look even slightly believable.</p>
+      </div>
+      <div class="info__row">
+        <button class="info__btn info__btn--see">See Project</button>
+        <button class="info__btn info__btn--more">Discover more</button>
+      </div>
+    </div>
+    <app-chart [data$]="data$"></app-chart>
+  </div>
+</section>
+
+<app-about></app-about>
+
+<section class="services">
+  <div class="container">
+    <p class="title title--inner">Services</p>
+    <p class="subtitle subtitle--inner">We Offer All Types Of IT Solution Services</p>
+    <div class="services__wrap">
+      <ng-container *ngFor="let item of data$[0]">
+        <app-service [item]="item"></app-service>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="container">
+    <p class="title title--inner">Team</p>
+    <p class="subtitle subtitle--inner">Our Best Team Member</p>
+    <div class="team__wrap">
+      <ng-container *ngFor="let item of data$[1]">
+        <app-team [item]="item"></app-team>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+
+<section class="project">
+  <div class="container">
+    <p class="title">Project</p>
+    <p class="subtitle">Awasome Portfolio</p>
+    <app-navbar [tabs]="tabs" (activeTabChange)="changeState($event)" [(activeTab)]="activeTab"></app-navbar>
+    <div class="project__wrap" id="project__holder">
+      <ng-container *ngFor="let tab of tabs; let index = index">
+        <ng-container *ngIf="activeTab === index">
+          <ng-container *ngFor="let item of projects; let point = index;">
+            <app-project [item]="item"
+                         class="project__box"
+                         [class.hide]="index > 0 && item.type.toLowerCase() !== tab.toLowerCase()"></app-project>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+<section class="feeback">
+  <div class="container">
+    <p class="title title--inner">Feedback</p>
+    <p class="subtitle subtitle--inner">What Are They Saying About Company</p>
+    <div class="feeback__holder">
+      <swiper [config]="configFeedback" #swiperFeedback>
+        <ng-template *ngFor="let item of data$[0]" swiperSlide>
+          <app-feeback [item]="item"></app-feeback>
+        </ng-template>
+      </swiper>
+
+      <button (click)="slideFeedbackPrev()" class="feeback__btn feeback__btn--prev">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18px"
+             height="24px"
+             viewBox="0 0 50 50">
+          <path d="M11.65 13.64c1.36-1.64 4.21.2 3.12 2.11-1.67 2.65-4.3 4.51-6 7.15 12.72.29 25.46-.08 38.18.17 2.66-.3 2.64 4.16-.01 3.87-12.72.23-25.45-.12-38.17.16 1.7 2.62 4.31 4.5 5.98 7.15 1.09 1.88-1.75 3.71-3.09 2.11C7.97 32.71 4.61 28.73.99 25.01c3.6-3.75 6.99-7.71 10.66-11.37Z"/></svg>
+      </button>
+      <button (click)="slideFeedbackNext()" class="feeback__btn feeback__btn--next">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18px"
+             height="24px"
+             viewBox="0 0 50 50">
+          <path d="M36.21 13.06c2.14-.35 3.27 1.85 4.63 3.08 2.51 3.08 5.61 5.66 7.97 8.86-2.37 3.2-5.45 5.79-7.97 8.86-1.36 1.22-2.49 3.42-4.61 3.05-1.32-.63-1.53-2.24-.58-3.29 1.76-2.25 3.9-4.19 5.6-6.5-12.73-.35-25.47.08-38.2-.19-2.65.26-2.67-4.13 0-3.85 12.73-.28 25.46.13 38.19-.19-1.66-2.35-3.75-4.33-5.59-6.53a2.038 2.038 0 0 1 .56-3.3Z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="container">
+    <div class="partners__wrap">
+      <swiper [config]="configPartners" #swiperPartners>
+        <ng-template *ngFor="let item of partners" swiperSlide>
+          <app-partners [item]="item"></app-partners>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</section>
+
+<section class="blog">
+  <div class="container">
+    <p class="title title--inner">What’s happening</p>
+    <p class="subtitle subtitle--inner">Best News & Blog</p>
+    <swiper [config]="configBlog" (swiper)="setSwiperInstance()" #swiperBlog>
+      <ng-template *ngFor="let item of data$[0]" swiperSlide>
+        <app-blog [item]="item"></app-blog>
+      </ng-template>
+    </swiper>
+  </div>
+</section>
+
+<app-footer></app-footer>

@@ -1,0 +1,13 @@
+
+
+<ng-container *ngIf="data$.length > 0; else loader">
+  <svg class="svg">
+    <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M0.001,0.001 V0.902 L0.144,0.949 L0.318,0.987 L0.434,1 H0.499 H0.585 L0.732,0.979 L0.887,0.94 L1,0.9 C1,0.6,1,0.001,1,0.001 C1,0.001,0.874,0.001,0.704,0.001 M0.704,0.001 C0.483,0.001,0.189,0.001,0.001,0.001 L0.704,0.001"></path></clipPath>
+  </svg>
+
+  <app-main-content [data$]="data$"></app-main-content>
+</ng-container>
+
+<ng-template #loader>
+  <app-preloader></app-preloader>
+</ng-template>
